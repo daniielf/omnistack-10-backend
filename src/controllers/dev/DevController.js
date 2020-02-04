@@ -44,7 +44,11 @@ module.exports = {
   },
 
   async getAll (req, resp) {
-    const devs = await Dev.find();
-    return resp.json(devs);
+    try {
+      const devs = await Dev.find();
+      return resp.json(devs);
+    } catch(e) {
+      return resp.status(500).json({"error": true});
+    }
   }
 };
